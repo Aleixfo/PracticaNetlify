@@ -1,0 +1,2 @@
+[build]
+command = "gulp build && npm install"
