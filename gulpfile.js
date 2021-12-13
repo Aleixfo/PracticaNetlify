@@ -64,4 +64,11 @@ exports.minhtml = minimitzahtml;
 
 
 //8- Crea una tasca "kittens" que executi totes les tasques (excepte els watchers), és a dir, executant la tasca "kittens" s'hauria de deixar preparat el projecte per pujar a producció.
-gulp.task('build', series(buildStyles, minimitzacss, minimitzajs, concatcss, concatjs, minimitzahtml));
+gulp.task('build', series(buildStyles, minimitzacss, minimitzajs, concatcss, concatjs, minimitzahtml, minimitzajsmodules));
+
+//4- Tasca "minimitzajs". Minimitza els arxius de la carpeta "js" i deixa'ls dins "dist/js".
+function minimitzajsmodules() {
+    return gulp.src('node_modules/bootstrap/dist/js/*')
+        .pipe(gulp.dest('./dist/js'));
+};
+exports.minjsmodules = minimitzajsmodules;
