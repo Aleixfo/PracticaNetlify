@@ -69,6 +69,6 @@ gulp.task('build', series(buildStyles, minimitzacss, minimitzajs, concatcss, con
 //4- Tasca "minimitzajs". Minimitza els arxius de la carpeta "js" i deixa'ls dins "dist/js".
 function minimitzajsmodules() {
     return gulp.src('node_modules/bootstrap/dist/js/*')
-        .pipe(gulp.dest('./dist/js'));
+        .pipe(gulp.dest('./js'));
 };
 exports.minjsmodules = minimitzajsmodules;
