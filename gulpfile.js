@@ -5,11 +5,12 @@ var gulp = require('gulp'),
     sass = require('gulp-sass')(require('sass')),
     uglify = require("gulp-uglify"),
     concat = require("gulp-concat"),
+    htmlmin = require('gulp-htmlmin'),
     { series, parallel } = require('gulp');
 
 //1- Tasca "sass". Compilar els arxius .scss de la carpeta "sass" i ficar-los dins una carpeta anomenada "css"
 function buildStyles() {
-    return gulp.src('./sass/**/*.scss')
+    return gulp.src('./scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css'));
 };
@@ -53,6 +54,14 @@ function concatjs() {
 };
 exports.concatjs = concatjs;
 
+function minimitzahtml() {
+    return gulp.src('./*.html')
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('dist'));
+}
+
+exports.minhtml = minimitzahtml;
+
 
 //8- Crea una tasca "kittens" que executi totes les tasques (excepte els watchers), és a dir, executant la tasca "kittens" s'hauria de deixar preparat el projecte per pujar a producció.
-gulp.task('build', series(buildStyles, minimitzacss, minimitzajs, concatcss, concatjs));
+gulp.task('build', series(buildStyles, minimitzacss, minimitzajs, concatcss, concatjs, minimitzahtml));
